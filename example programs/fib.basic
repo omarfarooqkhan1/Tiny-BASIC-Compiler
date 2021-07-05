@@ -1,0 +1,16 @@
+# Program to print first 
+# 5 natural numbers
+
+PRINT "First 5 Fibonnaci no.s"
+LET nums = 5
+LET a = 0
+LET b = 1
+
+#while loop
+WHILE nums > 0 REPEAT
+    PRINT a
+    LET c = a + b
+    LET a = b
+    LET b = c
+    LET nums = nums - 1
+ENDWHILE

@@ -1,0 +1,17 @@
+# Compute average of given values.
+
+LET a = 5
+
+LET b = 1
+LET s = 0
+WHILE b <= a REPEAT
+    LET s = s + b
+    LET b = b + 1
+ENDWHILE
+
+PRINT "Sum of first 5 natural no.s: "
+PRINT s
+
+
+PRINT "Average of first 5 natural no.s: "
+PRINT s / a
