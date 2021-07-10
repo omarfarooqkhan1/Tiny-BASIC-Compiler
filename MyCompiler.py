@@ -18,15 +18,19 @@ def compile_Click():
     lexer = Lexer(input)
     emitter = Emitter("out.c")
     parser = Parser(lexer, emitter)
-
     parser.parse()  # Start the parser.
-    st.insert(INSERT, "Symbol Table:\n\nVariables:\n")
-    st.insert(END, parser.symbols)
-    if len(parser.labelsDeclared) > 1:
-        st.insert(END, "\nLabels:\n", parser.labelsDeclared)
+    st.insert(INSERT, "Symbol Table:\n\n-> Variables:\n")
+    if len(parser.symbols) > 1:
+        st.insert(END, parser.symbols)
     else:
-        st.insert(END, "\n\nLabels:\nNo labels declared!\n")
-    cCode.insert(INSERT, emitter.code)
+        st.insert(END, "No variables declared!\n")
+    if len(parser.labelsDeclared) > 1:
+        st.insert(END, "\n-> Labels:\n")
+        st.insert(END, parser.labelsDeclared)
+    else:
+        st.insert(END, "\n-> Labels:\nNo labels declared!\n")
+    cCode.insert(INSERT, emitter.header)
+    cCode.insert(END, emitter.code)
     emitter.writeFile()  # Write the output to file.
     subprocess.call(["gcc", "out.c"])
     codeOutput.insert(INSERT, subprocess.getoutput("a.exe"))
